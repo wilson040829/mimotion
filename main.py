@@ -1,23 +1,34 @@
 # -*- coding: utf8 -*-
+
 import math
+
 import traceback
+
 from datetime import datetime
+
 import pytz
+
 import uuid
 
+
 import json
+
 import random
+
 import re
+
 import time
+
 import os
 
 from util.aes_help import encrypt_data, decrypt_data
 import util.zepp_helper as zeppHelper
 import util.push_util as push_util
 
+
 try:
     from dotenv import load_dotenv
-       load_dotenv(override=True)
+    load_dotenv(override=True)
 except ImportError:
     pass
 
