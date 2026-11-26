@@ -17,9 +17,10 @@ import util.push_util as push_util
 
 try:
     from dotenv import load_dotenv
-    load_dotenv(override=True)
+   load_dotenv(override=True)
 except ImportError:
     pass
+    
 
 # 获取默认值转int
 def get_int_value_default(_config: dict, _key, default):
@@ -29,6 +30,14 @@ def get_int_value_default(_config: dict, _key, default):
 
 # 获取当前时间对应的最大和最小步数
 def get_min_max_by_time(hour=None, minute=None):
+    target_step = os.environ.get("TARGET_STEP")
+    if target_step:
+        try:
+            target_step = int(target_step)
+            if target_step > 0:
+                return target_step, target_step
+        except ValueError:
+            pass
     if hour is None:
         hour = time_bj.hour
     if minute is None:
