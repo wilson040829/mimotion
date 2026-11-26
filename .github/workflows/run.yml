@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '26 10,12,14 * * *'
   workflow_dispatch:
+    inputs:
+      target_steps:
+        description: '目标步数（精确值，留空则按 CONFIG 随机范围）'
+        required: false
+        type: number
 
 jobs:
   build:
@@ -18,16 +23,17 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get install zsh -y
-          
+
       - name: 初始化Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.10"
-          
+
       - name: 开始
         env:
-            CONFIG: ${{ secrets.CONFIG }}
-            AES_KEY: ${{ secrets.AES_KEY }}
+          CONFIG: ${{ secrets.CONFIG }}
+          AES_KEY: ${{ secrets.AES_KEY }}
+          TARGET_STEP: ${{ inputs.target_steps }}
         run: |
           pip3 install -r requirements.txt
           python3 main.py
