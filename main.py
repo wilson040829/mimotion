@@ -20,7 +20,7 @@ try:
        load_dotenv(override=True)
 except ImportError:
     pass
-    
+
 # 获取默认值转int
 def get_int_value_default(_config: dict, _key, default):
     _config.setdefault(_key, default)
